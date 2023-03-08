@@ -7,7 +7,7 @@ import {isNumber} from "util";
 
 const pidFilePath = path.join(process.cwd(), `.uberboard/.pid`)
 
-export const startDashboard = () => {
+export const startDashboardDaemon = () => {
   const out = fs.openSync(path.join(process.cwd(), '.uberboard/info.log'), 'a');
   const err = fs.openSync(path.join(process.cwd(), '.uberboard/error.log'), 'a');
   const dashboardProcess = spawn(path.join(process.cwd(), `.uberboard/bin/dashboard`), [], {
@@ -19,6 +19,13 @@ export const startDashboard = () => {
     fs.writeFileSync(pidFilePath, "" + dashboardProcess.pid)
     dashboardProcess.unref()
   }
+}
+
+export const startDashboardSync = () => {
+  spawnSync(path.join(process.cwd(), `.uberboard/bin/dashboard`), [], {
+    cwd: process.cwd(),
+    stdio: 'inherit'
+  })
 }
 
 export const stopDashboard = () => {

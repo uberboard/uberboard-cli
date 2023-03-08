@@ -50,6 +50,7 @@ _profile_is_bash_or_zsh() {
 }
 
 _download() {
+  _echo "Downloading uberboard CLI software..."
   if _has_command "curl"; then
     curl --fail --compressed -q "$@"
   elif _has_command "wget"; then
@@ -72,16 +73,23 @@ install_uberboard() {
   local INSTALL_DIR
   INSTALL_DIR="$(_install_dir)"
 
-  local UBERBOARD_CLI_URL="https://s3.eu-central-1.amazonaws.com/releases.uberboard.io/channels/stable/uberboard-darwin-arm64.tar.gz"
+  local FILENAME
+  local OS
+  OS=$(uname -s | tr '[:upper:]' '[:lower:]')
+  local ARCH
+  ARCH=$(arch)
+  FILENAME="uberboard-${OS}-${ARCH}.tar.gz"
+
+  local UBERBOARD_CLI_URL="https://s3.eu-central-1.amazonaws.com/releases.uberboard.io/channels/stable/${FILENAME}"
 
   # Downloading to $INSTALL_DIR
   mkdir -p "$INSTALL_DIR"
   if [ -f "$INSTALL_DIR/package.json" ]; then
-    _echo "=> uberboard CLI is already installed in $INSTALL_DIR, trying to update the script"
+    _echo "=> uberboard CLI is already installed in $INSTALL_DIR, running update instead..."
   else
     _echo "=> Downloading uberboard CLI to '$INSTALL_DIR'"
   fi
-  _download -s "$UBERBOARD_CLI_URL" -o "$INSTALL_DIR/uberboard-darwin-arm64.tar.gz" || {
+  _download -s "$UBERBOARD_CLI_URL" -o "$INSTALL_DIR/${FILENAME}" || {
     _echo >&2 "Failed to download '$UBERBOARD_CLI_URL'"
     return 1
   } &
@@ -89,7 +97,7 @@ install_uberboard() {
   do
     wait "$job" || return $?
   done
-  tar xzvf "$INSTALL_DIR/uberboard-darwin-arm64.tar.gz" -C "$INSTALL_DIR" --strip 1 && rm -f "$INSTALL_DIR/uberboard-darwin-arm64.tar.gz"
+  tar xzvf "$INSTALL_DIR/${FILENAME}" -C "$INSTALL_DIR" --strip 1 && rm -f "$INSTALL_DIR/${FILENAME}"
   chmod a+x "$INSTALL_DIR/bin/uberboard" || {
     _echo >&2 "Failed to mark '$INSTALL_DIR/bin/uberboard' as executable"
     return 3

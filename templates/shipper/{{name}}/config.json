@@ -1,0 +1,9 @@
+{
+  "schedule": {
+    "every": "30 minutes"
+  },
+  "widget": {
+    "{{name}}": {
+    }
+  }
+}

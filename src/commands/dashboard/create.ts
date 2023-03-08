@@ -38,7 +38,7 @@ export default class Create extends Command {
     fs.mkdirSync(path.join(dashboardDir, `.uberboard`), {recursive: true})
 
     const downloader = new Downloader()
-    await downloader.download("uberboard", "uberboard", "templates/dashboard", {name})
+    await downloader.download("uberboard", "uberboard-cli", "templates/dashboard", {name})
 
     fs.mkdirSync(path.join(dashboardDir, 'views'), {recursive: true})
     fs.mkdirSync(path.join(dashboardDir, 'shippers'), {recursive: true})

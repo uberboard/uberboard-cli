@@ -1,0 +1,15 @@
+{
+  "widgets": {
+    "allowedModules": {
+      "builtin": ["https"],
+      "external": ["jira-client", "ical", "ical-expander"]
+    }
+  },
+  "auth": {
+    "method": "local",
+    "params": {
+      "username": "admin",
+      "password": "admin"
+    }
+  }
+}

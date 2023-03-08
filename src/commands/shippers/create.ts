@@ -23,6 +23,6 @@ export default class Create extends Command {
     const downloader = new Downloader({
       targetDir: path.resolve(process.cwd(), 'shippers')
     })
-    await downloader.download("uberboard", "uberboard", "templates/shipper", {name})
+    await downloader.download("uberboard", "uberboard-cli", "templates/shipper", {name})
   }
 }

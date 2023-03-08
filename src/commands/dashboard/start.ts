@@ -1,12 +1,13 @@
-import {Args, Command, Flags, ux} from '@oclif/core'
+import {Command, Flags, ux} from '@oclif/core'
 
-import {startDashboard} from "../../service/dashboardControl";
+import {startDashboardDaemon, startDashboardSync} from "../../service/dashboardControl";
 
 export default class Start extends Command {
 
   static description = 'Start dashboard in the current directory'
 
   static flags = {
+    daemon: Flags.boolean({name: "daemon", char: "d", description: "If provided, the dashboard will be running in background"})
   }
 
   static args = {
@@ -15,9 +16,14 @@ export default class Start extends Command {
 
   async run(): Promise<void> {
     const {args, flags} = await this.parse(Start)
-    ux.action.start('Starting dashboard')
-    startDashboard()
-    ux.action.stop()
+    const {daemon} = flags
+    if (daemon) {
+      ux.action.start('Starting dashboard')
+      startDashboardDaemon()
+      ux.action.stop()
+    } else {
+      startDashboardSync()
+    }
   }
 
 }
