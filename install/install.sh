@@ -50,7 +50,6 @@ _profile_is_bash_or_zsh() {
 }
 
 _download() {
-  _echo "Downloading uberboard CLI software..."
   if _has_command "curl"; then
     curl --fail --compressed -q "$@"
   elif _has_command "wget"; then
@@ -89,7 +88,7 @@ install_uberboard() {
   else
     _echo "=> Downloading uberboard CLI to '$INSTALL_DIR'"
   fi
-  _download -s "$UBERBOARD_CLI_URL" -o "$INSTALL_DIR/${FILENAME}" || {
+  _download  --progress-bar "$UBERBOARD_CLI_URL" -o "$INSTALL_DIR/${FILENAME}" || {
     _echo >&2 "Failed to download '$UBERBOARD_CLI_URL'"
     return 1
   } &
