@@ -19,7 +19,7 @@ $ npm install -g uberboard-cli
 $ uberboard COMMAND
 running command...
 $ uberboard (--version)
-uberboard-cli/1.0.2-0 darwin-arm64 node-v19.6.0
+uberboard-cli/1.0.3-0 darwin-arm64 node-v19.6.0
 $ uberboard --help [COMMAND]
 USAGE
   $ uberboard COMMAND

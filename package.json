@@ -1,6 +1,6 @@
 {
   "name": "uberboard-cli",
-  "version": "1.0.2-0",
+  "version": "1.0.3-0",
   "description": "CLI application for creating and managing uberboard.io dashboards",
   "author": "uberboard.io",
   "bin": {
