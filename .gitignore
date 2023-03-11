@@ -106,3 +106,5 @@ dist
 tmp/
 
 .DS_Store
+
+/test-dashboard
