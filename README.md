@@ -14,19 +14,12 @@ uberboard.io CLI
 <!-- tocstop -->
 # Usage
 <!-- usage -->
-
-#### Recommended installation
-``` sh-session
-$ curl -o- https://raw.githubusercontent.com/uberboard/uberboard-cli/main/install/install.sh | bash
-```
-
-#### Custom installation
 ```sh-session
 $ npm install -g uberboard-cli
 $ uberboard COMMAND
 running command...
 $ uberboard (--version)
-uberboard-cli/1.0.1-beta darwin-arm64 node-v19.6.0
+uberboard-cli/1.0.1 darwin-arm64 node-v19.6.0
 $ uberboard --help [COMMAND]
 USAGE
   $ uberboard COMMAND
@@ -35,10 +28,6 @@ USAGE
 <!-- usagestop -->
 # Commands
 <!-- commands -->
-* [`uberboard dashboard create [NAME]`](#uberboard-dashboard-create-name)
-* [`uberboard dashboard start`](#uberboard-dashboard-start)
-* [`uberboard dashboard stop`](#uberboard-dashboard-stop)
-* [`uberboard dashboard upgrade [DASHBOARDDIR]`](#uberboard-dashboard-upgrade-dashboarddir)
 * [`uberboard help [COMMANDS]`](#uberboard-help-commands)
 * [`uberboard plugins`](#uberboard-plugins)
 * [`uberboard plugins:install PLUGIN...`](#uberboard-pluginsinstall-plugin)
@@ -49,72 +38,7 @@ USAGE
 * [`uberboard plugins:uninstall PLUGIN...`](#uberboard-pluginsuninstall-plugin-1)
 * [`uberboard plugins:uninstall PLUGIN...`](#uberboard-pluginsuninstall-plugin-2)
 * [`uberboard plugins update`](#uberboard-plugins-update)
-* [`uberboard shippers`](#uberboard-shippers)
-* [`uberboard shippers add`](#uberboard-shippers-add)
-* [`uberboard shippers create NAME`](#uberboard-shippers-create-name)
-* [`uberboard shippers ls`](#uberboard-shippers-ls)
 * [`uberboard update [CHANNEL]`](#uberboard-update-channel)
-* [`uberboard views`](#uberboard-views)
-* [`uberboard views add`](#uberboard-views-add)
-* [`uberboard views create NAME`](#uberboard-views-create-name)
-* [`uberboard views ls`](#uberboard-views-ls)
-
-## `uberboard dashboard create [NAME]`
-
-Create a new dashboard
-
-```
-USAGE
-  $ uberboard dashboard create [NAME]
-
-ARGUMENTS
-  NAME  Name of the dashboard folder to create
-
-DESCRIPTION
-  Create a new dashboard
-```
-
-## `uberboard dashboard start`
-
-Start dashboard in the current directory
-
-```
-USAGE
-  $ uberboard dashboard start
-
-DESCRIPTION
-  Start dashboard in the current directory
-```
-
-## `uberboard dashboard stop`
-
-describe the command here
-
-```
-USAGE
-  $ uberboard dashboard stop
-
-DESCRIPTION
-  describe the command here
-
-EXAMPLES
-  $ uberboard dashboard stop
-```
-
-## `uberboard dashboard upgrade [DASHBOARDDIR]`
-
-Upgrade dashboard version
-
-```
-USAGE
-  $ uberboard dashboard upgrade [DASHBOARDDIR]
-
-ARGUMENTS
-  DASHBOARDDIR  Name of the dashboard folder to upgrade
-
-DESCRIPTION
-  Upgrade dashboard version
-```
 
 ## `uberboard help [COMMANDS]`
 
@@ -369,59 +293,6 @@ DESCRIPTION
   Update installed plugins.
 ```
 
-## `uberboard shippers`
-
-Manage uberboard shippers
-
-```
-USAGE
-  $ uberboard shippers
-
-DESCRIPTION
-  Manage uberboard shippers
-```
-
-_See code: [dist/commands/shippers/index.ts](https://github.com/uberboard/uberboard-cli/blob/v1.0.1-beta/dist/commands/shippers/index.ts)_
-
-## `uberboard shippers add`
-
-Install shipper
-
-```
-USAGE
-  $ uberboard shippers add
-
-DESCRIPTION
-  Install shipper
-```
-
-## `uberboard shippers create NAME`
-
-Generate a new shipper
-
-```
-USAGE
-  $ uberboard shippers create NAME
-
-ARGUMENTS
-  NAME  Name of the shipper to create
-
-DESCRIPTION
-  Generate a new shipper
-```
-
-## `uberboard shippers ls`
-
-List remotely available shippers
-
-```
-USAGE
-  $ uberboard shippers ls
-
-DESCRIPTION
-  List remotely available shippers
-```
-
 ## `uberboard update [CHANNEL]`
 
 update the uberboard CLI
@@ -458,57 +329,4 @@ EXAMPLES
 ```
 
 _See code: [@oclif/plugin-update](https://github.com/oclif/plugin-update/blob/v3.1.6/src/commands/update.ts)_
-
-## `uberboard views`
-
-Manage uberboard views
-
-```
-USAGE
-  $ uberboard views
-
-DESCRIPTION
-  Manage uberboard views
-```
-
-_See code: [dist/commands/views/index.ts](https://github.com/uberboard/uberboard-cli/blob/v1.0.1-beta/dist/commands/views/index.ts)_
-
-## `uberboard views add`
-
-Install view
-
-```
-USAGE
-  $ uberboard views add
-
-DESCRIPTION
-  Install view
-```
-
-## `uberboard views create NAME`
-
-Generate a new view
-
-```
-USAGE
-  $ uberboard views create NAME
-
-ARGUMENTS
-  NAME  Name of the view to create
-
-DESCRIPTION
-  Generate a new view
-```
-
-## `uberboard views ls`
-
-List remotely available views
-
-```
-USAGE
-  $ uberboard views ls
-
-DESCRIPTION
-  List remotely available views
-```
 <!-- commandsstop -->
