@@ -8,6 +8,11 @@ uberboard.io CLI
 ![GitHub](https://img.shields.io/github/license/uberboard/uberboard-cli)
 
 
+# Installation
+``` sh-session
+$ curl -o- https://raw.githubusercontent.com/uberboard/uberboard-cli/main/install/install.sh | bash
+```
+
 <!-- toc -->
 * [Usage](#usage)
 * [Commands](#commands)

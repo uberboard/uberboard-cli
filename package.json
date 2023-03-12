@@ -19,6 +19,7 @@
   "dependencies": {
     "@oclif/core": "^2",
     "@oclif/plugin-help": "^5",
+    "@oclif/plugin-not-found": "^2.3.22",
     "@oclif/plugin-plugins": "^2.3.0",
     "@oclif/plugin-update": "^3.1.6",
     "arch": "^2.2.0",
@@ -62,7 +63,8 @@
     "plugins": [
       "@oclif/plugin-help",
       "@oclif/plugin-plugins",
-      "@oclif/plugin-update"
+      "@oclif/plugin-update",
+      "@oclif/plugin-not-found"
     ],
     "topicSeparator": " ",
     "topics": {
