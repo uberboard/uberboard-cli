@@ -14,13 +14,6 @@ uberboard.io CLI
 <!-- tocstop -->
 # Usage
 <!-- usage -->
-
-#### Recommended installation
-``` sh-session
-$ curl -o- https://raw.githubusercontent.com/uberboard/uberboard-cli/main/install/install.sh | bash
-```
-
-#### Custom installation
 ```sh-session
 $ npm install -g uberboard-cli
 $ uberboard COMMAND
@@ -80,7 +73,10 @@ Start dashboard in the current directory
 
 ```
 USAGE
-  $ uberboard dashboard start
+  $ uberboard dashboard start [-d]
+
+FLAGS
+  -d, --daemon  If provided, the dashboard will be running in background
 
 DESCRIPTION
   Start dashboard in the current directory

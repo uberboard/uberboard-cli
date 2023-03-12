@@ -5,7 +5,7 @@ import * as path from "path";
 
 export default class Create extends Command {
 
-  static description = 'Generate a new shipper'
+  static description = 'Create base files to create your own shipper'
 
   static flags = {
   }
