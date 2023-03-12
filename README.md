@@ -19,7 +19,7 @@ $ npm install -g uberboard-cli
 $ uberboard COMMAND
 running command...
 $ uberboard (--version)
-uberboard-cli/1.0.1-beta darwin-arm64 node-v19.6.0
+uberboard-cli/1.1.0-beta darwin-arm64 node-v19.6.0
 $ uberboard --help [COMMAND]
 USAGE
   $ uberboard COMMAND
@@ -43,7 +43,7 @@ USAGE
 * [`uberboard plugins:uninstall PLUGIN...`](#uberboard-pluginsuninstall-plugin-2)
 * [`uberboard plugins update`](#uberboard-plugins-update)
 * [`uberboard shippers`](#uberboard-shippers)
-* [`uberboard shippers add`](#uberboard-shippers-add)
+* [`uberboard shippers add NAME`](#uberboard-shippers-add-name)
 * [`uberboard shippers create NAME`](#uberboard-shippers-create-name)
 * [`uberboard shippers ls`](#uberboard-shippers-ls)
 * [`uberboard update [CHANNEL]`](#uberboard-update-channel)
@@ -377,23 +377,26 @@ DESCRIPTION
   Manage uberboard shippers
 ```
 
-_See code: [dist/commands/shippers/index.ts](https://github.com/uberboard/uberboard-cli/blob/v1.0.1-beta/dist/commands/shippers/index.ts)_
+_See code: [dist/commands/shippers/index.ts](https://github.com/uberboard/uberboard-cli/blob/v1.1.0-beta/dist/commands/shippers/index.ts)_
 
-## `uberboard shippers add`
+## `uberboard shippers add NAME`
 
-Install shipper
+Download and install shipper
 
 ```
 USAGE
-  $ uberboard shippers add
+  $ uberboard shippers add NAME
+
+ARGUMENTS
+  NAME  Name of the shipper to download
 
 DESCRIPTION
-  Install shipper
+  Download and install shipper
 ```
 
 ## `uberboard shippers create NAME`
 
-Generate a new shipper
+Create base files to create your own shipper
 
 ```
 USAGE
@@ -403,7 +406,7 @@ ARGUMENTS
   NAME  Name of the shipper to create
 
 DESCRIPTION
-  Generate a new shipper
+  Create base files to create your own shipper
 ```
 
 ## `uberboard shippers ls`
@@ -467,7 +470,7 @@ DESCRIPTION
   Manage uberboard views
 ```
 
-_See code: [dist/commands/views/index.ts](https://github.com/uberboard/uberboard-cli/blob/v1.0.1-beta/dist/commands/views/index.ts)_
+_See code: [dist/commands/views/index.ts](https://github.com/uberboard/uberboard-cli/blob/v1.1.0-beta/dist/commands/views/index.ts)_
 
 ## `uberboard views add`
 
