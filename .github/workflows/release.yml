@@ -1,0 +1,37 @@
+name: Build
+
+on:
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: "Which branch to check out for releasing"
+        required: false
+        default: "main"
+      channel:
+        description: "Target channel for the release"
+        required: false
+        default: "beta"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ inputs.branch }}
+      - name: Setup NodeJS
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1-node16
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+      - name: Release
+        run: |
+          export VERSION=$(cat package.json | jq -r ".version")
+          export SHA=$(git rev-parse --short HEAD)
+          npx oclif promote --version=${VERSION} --sha=${SHA} --channel=${{ inputs.channel }}
