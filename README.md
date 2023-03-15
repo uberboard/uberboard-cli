@@ -18,19 +18,10 @@ curl -o- https://raw.githubusercontent.com/uberboard/uberboard-cli/main/install/
 * [Commands](#commands)
 <!-- tocstop -->
 # Usage
-<!-- usage -->
-```sh-session
-$ npm install -g uberboard-cli
-$ uberboard COMMAND
-running command...
-$ uberboard (--version)
-uberboard-cli/1.1.0-beta darwin-arm64 node-v19.6.0
-$ uberboard --help [COMMAND]
-USAGE
-  $ uberboard COMMAND
-...
+### Create new dashboard
+``` sh-session
+$ uberboard dashboards create
 ```
-<!-- usagestop -->
 # Commands
 <!-- commands -->
 * [`uberboard dashboard create [NAME]`](#uberboard-dashboard-create-name)
