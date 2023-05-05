@@ -79,7 +79,7 @@ install_uberboard() {
   ARCH=$(arch)
   FILENAME="uberboard-${OS}-${ARCH}.tar.gz"
 
-  local UBERBOARD_CLI_URL="https://s3.eu-central-1.amazonaws.com/releases.uberboard.io/channels/stable/${FILENAME}"
+  local UBERBOARD_CLI_URL="https://s3.eu-central-1.amazonaws.com/releases-uberboard-cli/channels/stable/${FILENAME}"
 
   # Downloading to $INSTALL_DIR
   mkdir -p "$INSTALL_DIR"
