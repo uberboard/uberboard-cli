@@ -374,7 +374,7 @@ DESCRIPTION
   Manage uberboard shippers
 ```
 
-_See code: [dist/commands/shippers/index.ts](https://github.com/uberboard/uberboard-cli/blob/v1.1.0-beta/dist/commands/shippers/index.ts)_
+_See code: [dist/commands/shippers/index.ts](https://github.com/uberboard/uberboard-cli/blob/v1.2.0/dist/commands/shippers/index.ts)_
 
 ## `uberboard shippers add NAME`
 
@@ -467,7 +467,7 @@ DESCRIPTION
   Manage uberboard views
 ```
 
-_See code: [dist/commands/views/index.ts](https://github.com/uberboard/uberboard-cli/blob/v1.1.0-beta/dist/commands/views/index.ts)_
+_See code: [dist/commands/views/index.ts](https://github.com/uberboard/uberboard-cli/blob/v1.2.0/dist/commands/views/index.ts)_
 
 ## `uberboard views add NAME`
 
