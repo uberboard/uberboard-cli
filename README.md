@@ -14,6 +14,7 @@ curl -o- https://raw.githubusercontent.com/uberboard/uberboard-cli/main/install/
 ```
 
 <!-- toc -->
+* [Installation](#installation)
 * [Usage](#usage)
 * [Commands](#commands)
 <!-- tocstop -->
@@ -44,7 +45,7 @@ $ uberboard dashboards create
 * [`uberboard shippers ls`](#uberboard-shippers-ls)
 * [`uberboard update [CHANNEL]`](#uberboard-update-channel)
 * [`uberboard views`](#uberboard-views)
-* [`uberboard views add`](#uberboard-views-add)
+* [`uberboard views add NAME`](#uberboard-views-add-name)
 * [`uberboard views create NAME`](#uberboard-views-create-name)
 * [`uberboard views ls`](#uberboard-views-ls)
 
@@ -468,13 +469,16 @@ DESCRIPTION
 
 _See code: [dist/commands/views/index.ts](https://github.com/uberboard/uberboard-cli/blob/v1.1.0-beta/dist/commands/views/index.ts)_
 
-## `uberboard views add`
+## `uberboard views add NAME`
 
 Install view
 
 ```
 USAGE
-  $ uberboard views add
+  $ uberboard views add NAME
+
+ARGUMENTS
+  NAME  Name of the view to download
 
 DESCRIPTION
   Install view

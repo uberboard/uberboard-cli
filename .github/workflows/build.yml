@@ -28,7 +28,8 @@ jobs:
         run: |
           npm ci
           npm run build
-          npx oclif pack tarballs
-          npx oclif upload tarballs
+          npx oclif pack tarballs --no-xz
+          npx oclif upload tarballs --no-xz
+
 
 

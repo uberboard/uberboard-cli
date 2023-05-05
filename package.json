@@ -1,6 +1,6 @@
 {
   "name": "uberboard-cli",
-  "version": "1.1.0-beta",
+  "version": "1.2.0",
   "description": "CLI application for creating and managing uberboard.io dashboards",
   "author": "uberboard.io",
   "bin": {
@@ -77,7 +77,8 @@
     },
     "update": {
       "s3": {
-        "bucket": "releases.uberboard.io"
+        "bucket": "releases.uberboard.io",
+        "host": "https://s3.eu-central-1.amazonaws.com/releases.uberboard.io"
       }
     }
   },
