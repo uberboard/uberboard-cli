@@ -41,7 +41,7 @@ export default class Upgrade extends Command {
         platform = 'macos'
       }
       const arch = os.arch()
-      const dashboardBinaryDownloadUrl = `https://s3.eu-central-1.amazonaws.com/releases.uberboard.io/${latestVersion}/dashboard-${platform}-x64.gz`
+      const dashboardBinaryDownloadUrl = `https://s3.eu-central-1.amazonaws.com/releases-uberboard/${latestVersion}/dashboard-${platform}-x64.gz`
       const binaryData = await download(dashboardBinaryDownloadUrl, true)
 
       ux.action.start(`Unzipping dashboard binary`)
