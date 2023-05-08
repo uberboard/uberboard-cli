@@ -46,6 +46,7 @@ export default class Upgrade extends Command {
       }
 
       const dashboardBinaryDownloadUrl = `https://releases-uberboard.s3.eu-central-1.amazonaws.com/${latestVersion}/dashboard-${platform}-${arch}.gz`
+      console.info("Loading binary from ", dashboardBinaryDownloadUrl)
       const binaryData = await download(dashboardBinaryDownloadUrl, true)
 
       ux.action.start(`Unzipping dashboard binary`)
