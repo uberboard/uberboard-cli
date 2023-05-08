@@ -96,7 +96,7 @@ install_uberboard() {
   do
     wait "$job" || return $?
   done
-  tar xzvf "$INSTALL_DIR/${FILENAME}" -C "$INSTALL_DIR" --strip 1 && rm -f "$INSTALL_DIR/${FILENAME}"
+  tar xzf "$INSTALL_DIR/${FILENAME}" -C "$INSTALL_DIR" --strip 1 && rm -f "$INSTALL_DIR/${FILENAME}"
   chmod a+x "$INSTALL_DIR/bin/uberboard" || {
     _echo >&2 "Failed to mark '$INSTALL_DIR/bin/uberboard' as executable"
     return 3
