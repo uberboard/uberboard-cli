@@ -42,7 +42,8 @@ export default class Upgrade extends Command {
       }
       let arch = os.arch()
       if (arch === 'arm') {
-        arch = 'arm64'
+        console.warn("Using x64 arch as fallback for macos")
+        arch = 'x64'
       }
 
       const dashboardBinaryDownloadUrl = `https://releases-uberboard.s3.eu-central-1.amazonaws.com/${latestVersion}/dashboard-${platform}-${arch}.gz`
