@@ -36,4 +36,4 @@ jobs:
           export VERSION=$(cat package.json | jq -r ".version")
           export SHA=$(git rev-parse --short HEAD)
           npx oclif promote --indexes --version=${VERSION} --sha=${SHA} --channel=stable --no-xz
-          npm version -m "bumped version to %s"
+          npm version patch -m "bumped version to %s"
