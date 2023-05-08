@@ -22,7 +22,7 @@ export default class Add extends Command {
       targetDir: path.resolve(process.cwd(), 'shippers', name)
     })
 
-    await downloader.download("uberboard", "uberboard-widgets", `shippers/${name}`)
+    await downloader.download("uberboard", "uberboard-widgets", `views/${name}`)
     ux.action.stop()
   }
 }
