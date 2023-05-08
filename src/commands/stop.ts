@@ -1,5 +1,5 @@
 import {Args, Command, Flags, ux} from '@oclif/core'
-import {stopDashboard} from "../../service/dashboardControl";
+import {stopDashboard} from "../service/dashboardControl";
 
 export default class Stop extends Command {
   static description = 'describe the command here'

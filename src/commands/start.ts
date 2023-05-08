@@ -1,6 +1,6 @@
 import {Command, Flags, ux} from '@oclif/core'
 
-import {startDashboardDaemon, startDashboardSync} from "../../service/dashboardControl";
+import {startDashboardDaemon, startDashboardSync} from "../service/dashboardControl";
 
 export default class Start extends Command {
 

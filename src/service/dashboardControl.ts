@@ -2,8 +2,6 @@ import {exec, execSync, spawn, spawnSync} from "child_process";
 import * as path from "path";
 import * as fs from "fs";
 import {ux} from "@oclif/core";
-import {isNumber} from "util";
-
 
 const pidFilePath = path.join(process.cwd(), `.uberboard/.pid`)
 
