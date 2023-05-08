@@ -21,6 +21,7 @@ export default class Start extends Command {
       ux.action.start('Starting dashboard')
       startDashboardDaemon()
       ux.action.stop()
+      console.info("Open in browser: http://localhost:3000")
     } else {
       startDashboardSync()
     }
