@@ -41,8 +41,8 @@ export default class Upgrade extends Command {
         platform = 'macos'
       }
       let arch = os.arch()
-      if (arch === 'arm') {
-        console.warn("Using x64 arch as fallback for macos")
+      if (['arm', 'arm64'].includes(arch)) {
+        console.warn("Using x64 arch as fallback for unsupported ARM architecture")
         arch = 'x64'
       }
 
