@@ -103,10 +103,11 @@ install_uberboard() {
   }
   _echo "Successfully installed uberboard!"
   _echo "You should add uberboard's 'bin' directory to the PATH environment variable by executing the following line:"
-  _echo "export PATH=\$PATH:$HOME/.uberboard/bin"
-  _echo "Alternatively, you can use the command $HOME/.uberboard/bin/uberboard directly."
+  _echo "export PATH=\$PATH:\$HOME/.uberboard/bin"
+  _echo "Alternatively, you can use the command \$HOME/.uberboard/bin/uberboard directly."
   _echo ""
-  _echo "try $HOME/.uberboard/bin/uberboard dashboard create"
+  _echo "To get started try:"
+  _echo "uberboard dashboard create"
 }
 
 install_uberboard
