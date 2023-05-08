@@ -20,7 +20,7 @@ export default class Upgrade extends Command {
 
   async run(): Promise<void> {
     const {args, flags} = await this.parse(Upgrade)
-    const latestVersion = "v1.2.0-84c50b4"
+    const latestVersion = "stable"
     const dashboardDir = !!args.dashboardDir ? args.dashboardDir : process.cwd()
 
     ensureDashboardDirectory(dashboardDir)
