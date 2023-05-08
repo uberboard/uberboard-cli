@@ -19,7 +19,7 @@ export default class Add extends Command {
 
     ux.action.start(`Download and install available view '${name}'`)
     const downloader = new Downloader({
-      targetDir: path.resolve(process.cwd(), 'shippers', name)
+      targetDir: path.resolve(process.cwd(), 'views', name)
     })
 
     await downloader.download("uberboard", "uberboard-widgets", `views/${name}`)
