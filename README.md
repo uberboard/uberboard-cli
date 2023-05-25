@@ -14,7 +14,7 @@ uberboard.io CLI
 
 # Installation
 ``` sh-session
-curl -o- https://raw.githubusercontent.com/uberboard/uberboard-cli/main/install/install.sh | bash
+curl -o- https://uberboard.io/install.sh | bash
 ```
 
 # Usage
