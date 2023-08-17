@@ -1,4 +1,6 @@
-import {Command} from "@oclif/core";
+import {Command, ux} from "@oclif/core";
+import Downloader from "../../service/downloader";
+
 
 export default class Ls extends Command {
 
@@ -13,6 +15,11 @@ export default class Ls extends Command {
 
   async run(): Promise<void> {
     const {args, flags} = await this.parse(Ls)
-    console.log("Listing available shippers")
+
+    ux.log("Available shippers:")
+    const downloader = new Downloader()
+
+    const shipperList = await downloader.listSubfolders("uberboard", "uberboard-widgets", `shippers`)
+    ux.log(shipperList.join("\n"))
   }
 }

@@ -1,9 +1,8 @@
 import {Octokit} from "@octokit/rest";
 import * as Keyv from "keyv";
-import * as path from "path";
 import * as fs from "fs";
-import {writeFileSync} from "fs";
 import * as handlebars from "handlebars";
+import * as JSZip from "jszip";
 
 type DownloaderOptions = {
   github?: {
@@ -27,83 +26,70 @@ export default class Downloader {
     this.octokit = new Octokit(this.options.github)
   }
 
-  #createDirectories(filepath: string) {
-    const dir = path.dirname(filepath);
-    fs.mkdirSync(dir, {recursive: true})
-  }
-
-  async #traverseRecursively(owner: string, repo: string, folder: string, sha?: string) {
-    const { data } = await this.octokit.repos.getContent({
+  async downloadGithubFolder(owner: string, repo: string, path: string, destination: string, templateReplacementData = {}) {
+    // Get the repo as a zip archive
+    const response = await this.octokit.repos.downloadArchive({
       owner,
       repo,
-      ref: sha,
-      path: folder,
+      archive_format: 'zipball',
+      ref: 'main'
     });
 
-    const dirs = data.map((node: any) => {
-      if (node.type === 'dir') {
-        return this.#traverseRecursively(owner, repo, node.path, sha);
-      }
-      return {
-        path: node.path,
-        type: node.type,
-        sha: node.sha
-      };
-    });
-    return Promise.all(dirs).then((nodes) => nodes.flat());
-  }
+    const zip = await JSZip.loadAsync(response.data);
+    const folderRegex = new RegExp(`[^/]+/${path}/`); // To match files within the specific subfolder
 
-  async #getDirectoryTree(owner: string, repo: string, directory: string, sha?: string) {
-    const cacheKey = sha ? `${owner}/${repo}#${sha}` : `${owner}/${repo}`;
+    await Promise.all(
+      Object.keys(zip.files)
+        .filter(filename => folderRegex.test(filename))
+        .map(async filename => {
+          const file = zip.files[filename];
+          if (!file.dir) {
+            const content = await file.async('nodebuffer');
+            const relativePath = filename.replace(/[^/]+\//, ''); // Remove the first folder (usually the repo name)
+            const outputPath = `${relativePath}`;
+            const hbsTemplateFilename = handlebars.compile(outputPath)
+            const realTargetPath = hbsTemplateFilename(templateReplacementData)
+            await fs.promises.mkdir(realTargetPath.replace(/\/[^/]+$/, ''), {recursive: true});
 
-    const cachedTree = await this.cache.get(cacheKey);
-    if (cachedTree) {
-      return cachedTree;
-    }
-
-    const tree = await this.#traverseRecursively(owner, repo, directory, sha);
-
-    await this.cache.set(cacheKey, tree);
-
-    return tree;
-  }
-
-  async #fetchFiles(owner: string, repo: string, directory: string) {
-    const tree = await this.#getDirectoryTree(owner, repo, directory);
-
-    const files = tree
-      .filter((node: any) => node.path.startsWith(directory) && node.type === 'file')
-      .map(async (node: any) => {
-        const { data } = await this.octokit.git.getBlob({
-          owner,
-          repo,
-          file_sha: node.sha,
-        });
-        return {
-          path: node.path,
-          contents: Buffer.from(data.content, data.encoding),
-        };
-      });
-
-    return Promise.all(files);
+            const contentTemplate = handlebars.compile(Buffer.from(content).toString())
+            await fs.promises.writeFile(realTargetPath, contentTemplate(templateReplacementData));
+          }
+        })
+    );
   }
 
   async download(owner: string, repository: string, folder: string, templateReplacementData = {}) {
     const outputDirectory = this.options?.targetDir || process.cwd()
-
-    const files = await this.#fetchFiles(owner, repository, folder)
-    files
-      .map(file => {
-        const relativeFilePath = path.relative(folder, file.path)
-        const targetFile = path.resolve(outputDirectory, relativeFilePath)
-
-
-        const hbsTemplateFilename = handlebars.compile(targetFile)
-        const realTargetFile = hbsTemplateFilename(templateReplacementData)
-        this.#createDirectories(realTargetFile)
-
-        const contentTemplate = handlebars.compile(Buffer.from(file.contents).toString())
-        writeFileSync(realTargetFile, contentTemplate(templateReplacementData))
-      })
+    await this.downloadGithubFolder(owner, repository, folder, outputDirectory, templateReplacementData)
   }
+
+  async listSubfolders(owner: string, repo: string, path: string) {
+    try {
+      const { data } = await this.octokit.repos.getContent({
+        owner,
+        repo,
+        path
+      });
+
+      // Filtere nur Verzeichnisse heraus und gebe ihre Namen zurück
+      return data
+        .filter((item: any) => item.type === 'dir')
+        .map((dir: any) => dir.name);
+    } catch (error: any) {
+
+      let retryDate = null;
+      if (error.response.status == 403) {
+        const date = Number.parseInt(error.response.headers['x-ratelimit-reset'])
+        if (Number.isInteger(date)) {
+          retryDate = new Date(date * 1000)
+        }
+      }
+      console.error("API rate limit reached. Please try again after ", retryDate)
+      if (!retryDate) {
+        console.error("An error occurred during listing subfolders", error);
+      }
+      return [];
+    }
+  }
+
 }
