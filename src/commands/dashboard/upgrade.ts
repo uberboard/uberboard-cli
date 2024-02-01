@@ -50,6 +50,10 @@ export default class Upgrade extends Command {
         arch = 'x64'
       }
 
+      if (platform === 'win') {
+        arch = `${arch}.exe`
+      }
+
       const dashboardBinaryDownloadUrl = `https://releases-uberboard.s3.eu-central-1.amazonaws.com/${latestVersion}/dashboard-${platform}-${arch}.gz`
       console.info("Loading binary from ", dashboardBinaryDownloadUrl)
       const binaryData = await download(dashboardBinaryDownloadUrl, true)
