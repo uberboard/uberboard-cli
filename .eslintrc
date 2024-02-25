@@ -2,5 +2,16 @@
   "extends": [
     "oclif",
     "oclif-typescript"
-  ]
+  ],
+  "rules": {
+
+    "@typescript-eslint/explicit-module-boundary-types": 0,
+    "@typescript-eslint/no-unused-vars": "warn",
+    "@typescript-eslint/no-explicit-any": "off",
+    "max-params": "off",
+    "camelcase": "off",
+    "no-unused-vars": "warn",
+    "unicorn/no-process-exit": "off",
+    "no-process-exit": "off"
+  }
 }

@@ -1,17 +1,13 @@
-import {Args, Command} from "@oclif/core";
+import {Args, Command} from '@oclif/core'
 
 export default class Index extends Command {
+  static args = {}
 
   static description = 'Manage uberboard views'
 
-  static flags = {
-  }
-
-  static args = {
-
-  }
+  static flags = {}
 
   async run(): Promise<void> {
-    const {args, flags} = await this.parse(Index)
+    // const {args, flags} = await this.parse(Index)
   }
 }

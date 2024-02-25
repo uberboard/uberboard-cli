@@ -1,8 +1,6 @@
 
-function render(callback, widgetConfig) {
-
-}
-
-module.exports = {
-    render
+function render(callback) {
+  callback({
+    message: new Date()
+  })
 }
