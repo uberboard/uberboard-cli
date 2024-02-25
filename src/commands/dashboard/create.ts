@@ -20,7 +20,7 @@ export default class Create extends Command {
       name = await ux.prompt("Dashboard's directory name")
     }
 
-    const dashboardDir = path.join('.', name)
+    const dashboardDir = path.resolve(path.join('.', name))
     if (fs.existsSync(dashboardDir)) {
       this.log(`WARNING: directory '${dashboardDir}' already exists!`)
       const shouldProceed = await ux.confirm('Proceed (y/n)')
@@ -43,5 +43,8 @@ export default class Create extends Command {
     ux.action.stop()
 
     await this.config.runCommand('dashboard:upgrade', [dashboardDir])
+    process.chdir(dashboardDir)
+    await this.config.runCommand('shippers:create', ['example'])
+    await this.config.runCommand('views:create', ['example'])
   }
 }
