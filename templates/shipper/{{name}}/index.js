@@ -1,6 +1,9 @@
 
+function init(config) {
+  console.log("init")
+}
 function render(callback) {
   callback({
-    message: new Date()
+    text: new Date()
   })
 }

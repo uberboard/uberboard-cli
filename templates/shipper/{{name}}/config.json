@@ -1,5 +1,5 @@
 {
   "schedule": {
-    "every": "5 seconds"
+    "every": "1 seconds"
   }
 }
