@@ -39,7 +39,7 @@ export default class Upgrade extends Command {
       // download dashboard binary:
 
       let arch = os.arch()
-      if (['arm', 'arm64'].includes(arch)) {
+      if (['arm', 'arm64', 'ia32'].includes(arch)) {
         console.warn('Using x64 arch as fallback for unsupported ARM architecture')
         arch = 'x64'
       }
