@@ -44,7 +44,7 @@ export default class Create extends Command {
 
     await this.config.runCommand('dashboard:upgrade', [dashboardDir])
     process.chdir(dashboardDir)
-    await this.config.runCommand('shippers:create', ['text'])
-    await this.config.runCommand('views:create', ['clock'])
+    await this.config.runCommand('shippers:create', ['example'])
+    await this.config.runCommand('views:create', ['example'])
   }
 }

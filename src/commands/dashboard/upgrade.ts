@@ -6,6 +6,7 @@ import {dirname} from 'node:path'
 import {gunzip} from 'node:zlib'
 
 import {download, ensureDashboardDirectory} from '../../service/file-utils'
+import {detectPlatform} from "../../service/dashboard-control";
 
 export default class Upgrade extends Command {
   static args = {
@@ -22,7 +23,7 @@ export default class Upgrade extends Command {
     const dashboardDir = args.dashboardDir || process.cwd()
 
     ensureDashboardDirectory(dashboardDir)
-    let platform = this.detectPlatform();
+    let platform = detectPlatform();
 
     let binaryFileName = platform == 'win' ? 'dashboard.exe' : 'dashboard'
     const binaryDir = path.join(dashboardDir, `.uberboard/bin/${latestVersion}`)
@@ -61,31 +62,37 @@ export default class Upgrade extends Command {
         fs.writeFileSync(binaryFileDest, data)
         fs.chmodSync(binaryFileDest, '755')
 
-        const linkFileName = platform == 'win' ? 'dashboard.lnk' : 'dashboard'
-        const symlinkFileLocation = path.join(dashboardDir, '.uberboard', 'bin', linkFileName)
-        if (!fs.existsSync(symlinkFileLocation)) {
-          if (platform === 'win') {
-            const ws = require('windows-shortcuts')
-            ws.create(symlinkFileLocation, binaryFileDest);
-          } else {
-            fs.symlinkSync(path.relative(dirname(symlinkFileLocation), binaryFileDest), symlinkFileLocation, 'file')
-          }
-        }
+        this.createSymlink(platform, dashboardDir, binaryFileDest);
 
         ux.action.stop()
       })
     }
   }
 
-  private detectPlatform() {
-    let platform: string = os.platform()
-    if (platform === 'darwin') {
-      platform = 'macos'
+  private createSymlink(platform: string, dashboardDir: string, binaryFileDest: string) {
+    const filename = 'dashboard'
+    const binFolder = path.join(dashboardDir, '.uberboard', 'bin')
+    if (platform != 'win') {
+      const symlinkFileLocation = path.join(binFolder, filename)
+      if (!fs.existsSync(symlinkFileLocation)) {
+        fs.symlinkSync(path.relative(dirname(symlinkFileLocation), binaryFileDest), symlinkFileLocation, 'file')
+      }
+      return
     }
 
-    if (platform === 'win32') {
-      platform = 'win'
+    // create cmd file for windows:
+    const cmdFileLocation = path.join(binFolder, filename + ".cmd")
+    if (!fs.existsSync(cmdFileLocation)) {
+      try {
+        fs.writeFileSync(cmdFileLocation, `
+@echo off
+"${binFolder}/stable/dashboard.exe" %*
+        `);
+        // file written successfully
+      } catch (err) {
+        console.error(err);
+      }
     }
-    return platform;
   }
+
 }

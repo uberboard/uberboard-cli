@@ -2,13 +2,16 @@ import {ux} from '@oclif/core'
 import {spawn, spawnSync} from 'node:child_process'
 import * as fs from 'node:fs'
 import * as path from 'node:path'
+import * as os from "node:os";
 
 const pidFilePath = path.join(process.cwd(), '.uberboard/.pid')
 
 export const startDashboardDaemon = () => {
+  const binaryName = detectPlatform() == 'win' ? 'dashboard.cmd' : 'dashboard'
   const out = fs.openSync(path.join(process.cwd(), '.uberboard/info.log'), 'a')
   const err = fs.openSync(path.join(process.cwd(), '.uberboard/error.log'), 'a')
-  const dashboardProcess = spawn(path.join(process.cwd(), '.uberboard/bin/dashboard'), [], {
+
+  const dashboardProcess = spawn(path.join(process.cwd(), `.uberboard/bin/${binaryName}`), [], {
     cwd: process.cwd(),
     detached: true,
     stdio: ['ignore', out, err],
@@ -20,7 +23,8 @@ export const startDashboardDaemon = () => {
 }
 
 export const startDashboardSync = () => {
-  spawnSync(path.join(process.cwd(), '.uberboard/bin/dashboard'), [], {
+  const binaryName = detectPlatform() == 'win' ? 'dashboard.cmd' : 'dashboard'
+  spawnSync(path.join(process.cwd(), `.uberboard/bin/${binaryName}`), [], {
     cwd: process.cwd(),
     stdio: 'inherit',
   })
@@ -45,4 +49,16 @@ export const stopDashboard = () => {
 
   fs.unlinkSync(pidFilePath)
   ux.action.stop()
+}
+
+export const detectPlatform = () => {
+  let platform: string = os.platform()
+  if (platform === 'darwin') {
+    platform = 'macos'
+  }
+
+  if (platform === 'win32') {
+    platform = 'win'
+  }
+  return platform;
 }

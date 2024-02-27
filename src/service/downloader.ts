@@ -23,6 +23,10 @@ export default class Downloader {
     // this.cache = new Keyv({namespace: 'uberboard-cli', ttl: 1000 * 60 * 10})
     this.options = {...this.defaultOptions, ...options}
     this.octokit = new Octokit(this.options.github)
+    handlebars.registerHelper('keepAsVariable', function(text) {
+      const result = '{{' + text + ']}';
+      return new Handlebars.SafeString(result);
+    });
   }
 
   async download(owner: string, repository: string, folder: string, templateReplacementData = {}) {
