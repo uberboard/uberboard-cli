@@ -1,3 +1,16 @@
 .{{lowercase name}} {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
 
+.{{lowercase name}} .large {
+  font-size: 400%;
+  font-weight: bold;
+}
+
+.{{lowercase name}} .small {
+  font-size: 120%;
+  opacity: 0.8;
 }
