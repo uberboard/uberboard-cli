@@ -34,6 +34,7 @@
     "github-download-directory": "^3.0.0",
     "gunzip-file": "^0.1.1",
     "handlebars": "^4.7.8",
+    "handlebars-helpers": "^0.10.0",
     "jszip": "^3.10.1",
     "keyv": "^4.5.4",
     "octokit": "^3.1.2",
